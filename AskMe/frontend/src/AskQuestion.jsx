@@ -1,15 +1,46 @@
-// src/components/AskQuestion.jsx
-
-import React from 'react';
+import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const AskQuestion = () => {
-  const handleSubmit = (e) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Question submitted successfully!');
+    const tagArray = tags.split(',').map((tag) => tag.trim()).filter(Boolean);
+
+    const postData = {
+      title,
+      description, // HTML string from ReactQuill
+      tags: tagArray,
+    };
+
+    try {
+      const res = await fetch('http://localhost:5000/api/questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert('✅ Question submitted!');
+        setTitle('');
+        setDescription('');
+        setTags('');
+      } else {
+        alert('❌ Submission failed.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('🚨 Server error occurred.');
+    }
   };
 
   return (
-    <div className="min-h-screen text-gray-800 px-4 py-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-x">
+    <div className="min-h-screen text-gray-800 px-4 py-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
       {/* Header */}
       <header className="flex justify-between items-center bg-white p-4 shadow-md rounded-md mb-6">
         <h1 className="text-2xl font-bold text-blue-600">StackIt</h1>
@@ -32,6 +63,8 @@ const AskQuestion = () => {
               type="text"
               id="title"
               name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your question title"
               required
@@ -41,23 +74,14 @@ const AskQuestion = () => {
           {/* Description */}
           <div>
             <label htmlFor="description" className="block font-medium mb-1">Description</label>
-            <div className="bg-gray-100 border border-gray-300 rounded-md p-2">
-              <div className="flex gap-2 mb-2">
-                {['B', 'I', 'U', 'S', '•', '1.', '🔗', '📷', '📄', '🔧'].map((tool, index) => (
-                  <button key={index} type="button" className="text-sm px-2 py-1 bg-white border rounded">
-                    {tool}
-                  </button>
-                ))}
-              </div>
-              <textarea
-                id="description"
-                name="description"
-                rows="5"
-                className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Describe your issue in detail..."
-                required
-              />
-            </div>
+            <ReactQuill
+              id="description"
+              value={description}
+              onChange={setDescription}
+              className="bg-white rounded"
+              placeholder="Describe your issue in detail..."
+              theme="snow"
+            />
           </div>
 
           {/* Tags */}
@@ -67,9 +91,12 @@ const AskQuestion = () => {
               type="text"
               id="tags"
               name="tags"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
               className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="e.g. javascript, react, tailwind"
             />
+            <p className="text-sm text-gray-500 mt-1">Comma-separated values (e.g. react, api, css)</p>
           </div>
 
           {/* Submit */}
