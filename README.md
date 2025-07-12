@@ -1,16 +1,18 @@
-Team name:- TechnoFire
+**Team name:- TechnoFire**
+
 Team Details:-
-      Team Member 1:-Rana Dhruveshkumar Subhashbhai
-      Email ID:-ranadhruvesh2004@gmail.com
-      Team Member 2:-Rajput shivam Subhashbhai
-      Email ID:-shiva11345698@gmail.com
-      Team Member 3:-Prusty Prasanna Ramakantabhai
-      Email ID:-prustyprasanna95@gmail.com
-      Team Member 4:-Purani Harshad Pradipbhai
-      Email ID:-fazeharsh79@gmail.com
+
+      -Team Member 1:-Rana Dhruveshkumar Subhashbhai(Team Leader)
+      -Email ID:-ranadhruvesh2004@gmail.com
+      -Team Member 2:-Rajput shivam Subhashbhai
+      -Email ID:-shiva11345698@gmail.com
+      -Team Member 3:-Prusty Prasanna Ramakantabhai
+      -Email ID:-prustyprasanna95@gmail.com
+      -Team Member 4:-Purani Harshad Pradipbhai
+      -Email ID:-fazeharsh79@gmail.com
 
 
-Problem Statement of odoo hackathon 2025 :- **StackIt – Minimal Q&A Forum Platform**
+**Problem Statement of odoo hackathon 2025 :- **StackIt – Minimal Q&A Forum Platform**
 
 StackIt is a lightweight question-and-answer platform designed for easy knowledge sharing and collaboration. It focuses on simplicity, making it user-friendly for communities that want to ask, answer, and learn together.
 
