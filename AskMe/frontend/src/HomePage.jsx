@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // only if you're using routing
 
 const HomePage = () => {
-  // Dummy data for question list
+  const navigate = useNavigate(); // remove if not using React Router
+
   const questions = [
     {
       id: 1,
@@ -12,18 +14,17 @@ const HomePage = () => {
       author: 'User123',
       answers: 3
     },
-    // add more question objects here…
   ];
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  
-                 bg-[length:200%_200%] animate-gradient-x text-gray-900 px-6 py-8"
-    >
+    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 px-6 py-8">
       {/* Header */}
       <header className="flex justify-between items-center bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow mb-6">
         <h1 className="text-2xl font-bold text-blue-600">StackIt</h1>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+        <button
+          onClick={() => navigate('/login')}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
           Login
         </button>
       </header>
@@ -32,7 +33,10 @@ const HomePage = () => {
       <main className="max-w-4xl mx-auto bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow space-y-6">
         {/* Top Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+          <button
+            onClick={() => navigate('/ask')}
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+          >
             Ask New Question
           </button>
 
@@ -85,10 +89,16 @@ const HomePage = () => {
 
               {/* View / Add Answer Buttons */}
               <div className="mt-4 flex gap-2">
-                <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition text-sm">
+                <button
+                  onClick={() => navigate(`/question/${q.id}`)}
+                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition text-sm"
+                >
                   View Answers
                 </button>
-                <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition text-sm">
+                <button
+                  onClick={() => navigate(`/question/${q.id}/answer`)}
+                  className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition text-sm"
+                >
                   Add Answer
                 </button>
               </div>
